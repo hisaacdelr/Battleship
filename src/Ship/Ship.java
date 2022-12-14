@@ -2,9 +2,11 @@ package Ship;
 
 import Board.Spot;
 
+import java.util.List;
+
 public class Ship {
-    private Spot[] spots;
-    public Ship(Spot[] spots){
+    private List<Spot> spots;
+    public Ship(List<Spot> spots){
         this.spots = spots;
     }
 
