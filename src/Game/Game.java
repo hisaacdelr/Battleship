@@ -1,14 +1,15 @@
-package Game;/*
+package Game;
 
- */
 
-import Board.Board;
+import Player.CpuPlayer;
+import Player.HumanPlayer;
 import Player.Player;
+
 
 public class Game {
     public void startGame(){
         System.out.println("Inside game object");
-        Player player = new Player();
-        Player CPUplayer = new Player();
+        Player humanPlayer = new HumanPlayer();
+        Player cpuPlayer = new CpuPlayer();
     }
 }
