@@ -10,6 +10,10 @@ public class CpuPlayer extends Player {
 
 
     public void handleTurn(){
-        System.out.println("CPU Player turn, this is automated.");
+        System.out.println("CPU Player shoots, this is automated.");
+    }
+
+    public boolean isCpu(){
+        return true;
     }
 }
