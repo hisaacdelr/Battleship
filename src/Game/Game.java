@@ -24,14 +24,38 @@ public class Game {
         playerList.add(cpuPlayer);
     }
 
-    public void startGame(){
+    public void runGame(){
         System.out.println("Starting game!");
 
-        for(Player player : playerList){
-            String result = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
-            player.handleTurn();
+        while (isContinueGame()){
+            for(Player player : playerList){
+                String result = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
+                player.handleTurn();
+            }
         }
 
+        declareWinner();
+    }
+
+    public boolean isContinueGame(){
+        for (Player player : playerList) {
+            if (!player.hasShips()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void declareWinner(){
+        for (Player player : playerList) {
+            if (player.hasShips()) {
+                if (player.isCpu()) {
+                    System.out.println("CPU has won :(");
+                } else {
+                    System.out.println("The player has won!!");
+                }
+            }
+        }
     }
 
     /*
