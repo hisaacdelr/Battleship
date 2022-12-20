@@ -5,7 +5,7 @@ public class Main {
 
         Game game = new Game();
         game.setup();
-        game.startGame();
+        game.runGame();
 
     }
 }

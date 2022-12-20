@@ -6,7 +6,7 @@ public class Spot {
     private final int row;
     private final int column;
     private boolean occupied = false;
-    private boolean selected = false;
+    private boolean hit = false;
 
     public Spot(int row, int column){
         this.row = row;
@@ -21,11 +21,13 @@ public class Spot {
         occupied = state;
     }
 
-    public boolean isSelected(){
-        return selected;
+    public boolean isHit(){
+        return hit;
     }
 
-    public void setSelected(boolean state){
-        selected = state;
+    public void setHit(boolean state) {
+        if (occupied) {
+            hit = state;
+        }
     }
 }
