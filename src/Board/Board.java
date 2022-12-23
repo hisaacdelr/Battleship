@@ -24,6 +24,10 @@ public class Board {
         setup();
     }
 
+    public Spot getSpot(int x, int y){
+        return grid[x][y];
+    }
+
     // Move to utility function
     private void setup(){
         // initialize spot objects
