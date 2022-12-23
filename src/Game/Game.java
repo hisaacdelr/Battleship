@@ -29,7 +29,7 @@ public class Game {
 
         while (isContinueGame()){
             for(Player player : playerList){
-                String result = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
+                String coordinate = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
                 player.handleTurn();
             }
         }
@@ -63,13 +63,15 @@ public class Game {
      */
 
     public String displaySelectCoordinatePrompt(){
-        System.out.print("Select a row (A-J): ");
-        String row = cli.next();
+        System.out.println("Please type a coordinate | rows: A-J | col: 1-10 ");
+        System.out.print("Ex. A4, J10");
+        String coordinate = cli.next();
+        // TODO: Check the coordinates
         System.out.print("Select a column (1-10): ");
         int col = cli.nextInt();
-        System.out.printf("User selected coordinate %s%d%n", row, col);
+        System.out.printf("User selected coordinate %s", coordinate);
 
-        return String.format("%s%d", row, col);
+        return coordinate;
     }
 
     public String generateRandomCoordinate(){
