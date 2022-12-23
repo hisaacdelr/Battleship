@@ -26,12 +26,22 @@ public class Game {
 
     public void runGame(){
         System.out.println("Starting game!");
+        int currentPlayer = 0;
+        int otherPlayer = 1;
 
         while (isContinueGame()){
-            for(Player player : playerList){
-                String coordinate = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
-                player.handleTurn();
+            Player player = playerList.get(currentPlayer);
+            String coordinate = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
+            player.handleHit(coordinate, playerList.get(otherPlayer));
+
+            if (currentPlayer == 0) {
+                currentPlayer = 1;
+                otherPlayer = 0;
+            } else {
+                currentPlayer = 0;
+                otherPlayer = 1;
             }
+
         }
 
         declareWinner();
