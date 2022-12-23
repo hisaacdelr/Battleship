@@ -74,7 +74,7 @@ public class Board {
             } else { //vertical
                 currentCoord = new int[]{coordinate[0]+  i, coordinate[1]};
             }
-            if (!validSpot(currentCoord)){
+            if (!validSpot(currentCoord) && !grid[coordinate[0]][coordinate[1]].isOccupied()){
                 return false;
             }
         }
@@ -102,19 +102,16 @@ public class Board {
 
     /*
         input: int[] coordinates, [row, col], 0-based
-        output: returns if the coordinates given are all available
+        output: returns if the coordinate is a spot within the board
      */
     private boolean validSpot(int[] coordinate){
         int row = coordinate[0];
         int col = coordinate[1];
         return (row >= 0 && row < BOARD_SIZE
-                && col >= 0 && col < BOARD_SIZE
-                && !grid[coordinate[0]][coordinate[1]].isOccupied());
+                && col >= 0 && col < BOARD_SIZE);
     }
 
-    /*
 
-     */
     private int convertLetterToIndex(char letter){
         // a = 97 | ASCII
         int A_ASCII = 97;
