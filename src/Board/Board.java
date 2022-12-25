@@ -143,7 +143,7 @@ public class Board {
                 } else { //vertical
                     currentCoord = new int[]{coordinate[0] + i, coordinate[1]};
                 }
-                if (!validSpot(currentCoord) && !grid[currentCoord[0]][currentCoord[1]].isOccupied()) {
+                if (!validSpot(currentCoord) || grid[currentCoord[0]][currentCoord[1]].isOccupied()) {
                     return false;
                 }
             }
