@@ -5,7 +5,6 @@ import static Utilities.Constants.BOARD_SIZE;
 public class InputHelper {
 
     public int[] convertInputToCoordinate(String coordinate){
-        System.out.printf("In inputHelper, coordinate passed: %s\n", coordinate);
         try{
             coordinate = coordinate.strip();
 

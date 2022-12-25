@@ -43,7 +43,7 @@ public class Game {
             boolean isValidHit = false;
             int[] coordinate = new int[2];
             while (!isValidHit) {
-                String playerInput = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
+                String playerInput = !player.isCpu() ? getCoordinateFromPrompt() : generateRandomCoordinate();
                 coordinate = inputHelper.convertInputToCoordinate(playerInput);
                 isValidHit = player.isValidHit(coordinate, enemy);
             }
@@ -75,9 +75,11 @@ public class Game {
     }
 
     private void printBoard(Board board){
+        System.out.println("Enemy Board Status: ");
         for (int i = 0; i < BOARD_SIZE; i++){
             for (int j = 0; j < BOARD_SIZE; j++){
                 Spot spot = board.getSpot(i, j);
+
                 if (spot.isHit() && spot.isOccupied()) {
                     System.out.print("🟥");
                 } else if(spot.isOccupied()){
@@ -102,19 +104,19 @@ public class Game {
                 }
             }
         }
-        System.out.println("It's a tie!");
+        System.out.println("Thanks for playing!");
     }
 
     /*
         User Prompt methods, move to print utility class
      */
 
-    public String displaySelectCoordinatePrompt(){
+    public String getCoordinateFromPrompt(){
         System.out.println("Please type a coordinate | rows: A-J | col: 1-10 ");
         System.out.print("Ex. A4, J10: ");
         String coordinate = cli.next();
 
-        System.out.printf("User selected coordinate %s", coordinate);
+        System.out.printf("\nUser selected coordinate %s\n", coordinate);
         return coordinate;
     }
 
@@ -124,7 +126,7 @@ public class Game {
         // 26 letters in alphabet
         char row = (char) (r.nextInt(BOARD_SIZE) + 'A');
         int col = r.nextInt(BOARD_SIZE) + 1;
-        System.out.printf("CPU selected coordinate %s%d%n", row, col);
+        System.out.printf("\nCPU selected coordinate %s%d%n", row, col);
         return String.format("%c%d", row, col);
     }
 }
