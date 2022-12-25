@@ -5,5 +5,4 @@ public class Constants {
 
     // int representations of directions of a ship
     public static final int HORIZONTAL = 0;
-    public static final int VERTICAL = 0;
 }
