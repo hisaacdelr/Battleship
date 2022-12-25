@@ -1,7 +1,7 @@
 # Battleship
 
 ## Pre-requisites
-- Java 8 or above installed
+- Java 11 or above installed
 
 ## Specs
 - This is a command line, text-only game to simulate battleship against an easy computer opponent
