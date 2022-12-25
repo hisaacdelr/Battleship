@@ -1,5 +1,8 @@
-package Board;/*
+package Board;
 
+/*
+    row = 0-based
+    col = 0-based
  */
 
 public class Spot {

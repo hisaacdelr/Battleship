@@ -8,9 +8,9 @@ public abstract class Player {
 
     protected Board board;
 
-    public void handleHit(String coordinate, Player player) {
+    public void handleHit(int[] coordinate, Player player) {
         Board enemyBoard = player.board;
-        Spot target = enemyBoard.getSpot(0, 0); //TODO: remove hardcoded values .getSpot
+        Spot target = enemyBoard.getSpot(coordinate[0], coordinate[1]); //TODO: remove hardcoded values .getSpot
 
         target.setHit(true);
     };

@@ -8,11 +8,15 @@ import Board.Board;
 import Player.CpuPlayer;
 import Player.HumanPlayer;
 import Player.Player;
+import Utilities.InputHelper;
+
+import static Utilities.Constants.BOARD_SIZE;
 
 
 public class Game {
 
     Scanner cli = new Scanner(System.in);
+    InputHelper inputHelper = new InputHelper();
 
     private ArrayList<Player> playerList = new ArrayList<>();
     public void setup(){
@@ -33,7 +37,10 @@ public class Game {
 
         while (isContinueGame()){
             Player player = playerList.get(currentPlayer);
-            String coordinate = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
+            String playerInput = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
+            // TODO: Check the coordinates, convert to ints for grid
+            int[] coordinate = inputHelper.convertInputToCoordinate(playerInput);
+
             player.handleHit(coordinate, playerList.get(otherPlayer));
 
             if (currentPlayer == 0) {
@@ -77,19 +84,19 @@ public class Game {
 
     public String displaySelectCoordinatePrompt(){
         System.out.println("Please type a coordinate | rows: A-J | col: 1-10 ");
-        System.out.print("Ex. A4, J10");
+        System.out.print("Ex. A4, J10: ");
         String coordinate = cli.next();
-        // TODO: Check the coordinates, convert to ints for grid
-        System.out.printf("User selected coordinate %s", coordinate);
 
+        System.out.printf("User selected coordinate %s", coordinate);
         return coordinate;
     }
 
     public String generateRandomCoordinate(){
         Random r = new Random();
         // A = 65, a = 97, 32
+        // 26 letters in alphabet
         char row = (char) (r.nextInt(26) + 'A');
-        int col = r.nextInt(10) + 1;
+        int col = r.nextInt(BOARD_SIZE) + 1;
         System.out.printf("CPU selected coordinate %s%d%n", row, col);
         return String.format("%c%d", row, col);
     }
