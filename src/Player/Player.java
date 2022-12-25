@@ -12,11 +12,16 @@ public abstract class Player {
         return board;
     }
 
-    // TODO : redudndant with Board's validSpot method maybe? refactor
     public boolean isValidHit(int[] coordinate, Player enemy){
         try {
-            return !enemy.board.getSpot(coordinate[0], coordinate[1]).isHit();
-        } catch (IndexOutOfBoundsException e) {
+            Spot spot = enemy.board.getSpot(coordinate[0], coordinate[1]);
+            if (spot.isHit()){
+                System.out.println("Coordinate was already selected. Please choose another coordinate.");
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
             return false;
         }
     }
