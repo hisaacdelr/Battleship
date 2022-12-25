@@ -13,6 +13,7 @@ import static Utilities.Constants.BOARD_SIZE;
 
 public class Board {
     private Spot[][] grid;
+    private final int[] SHIP_SIZES = new int[]{5, 4, 3, 2};
 
     private ArrayList<Ship> ships = new ArrayList<>();
     private final int boardSize;
@@ -44,9 +45,7 @@ public class Board {
     }
 
     private void placeShipsOnBoard(){
-        int[] shipSizes = new int[]{5, 4, 3, 2};
-
-        for (int ship : shipSizes){
+        for (int ship : SHIP_SIZES){
             placeShip(ship);
         }
     }
