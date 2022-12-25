@@ -16,7 +16,7 @@ public class InputHelper {
                     System.out.printf("Letter is not A-%c", getUpperBoundRowLetter());
                 }
                 // subtract 65 (int of capital A)
-                int rowInt = (int) (rowLetter - 'A');
+                int rowInt = rowLetter - 'A';
 
                 // check if valid number 1-10 (or upper bound)
                 String columnNumberString = coordinate.substring(1);

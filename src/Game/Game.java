@@ -35,11 +35,17 @@ public class Game {
         int currentPlayer = 0;
         int otherPlayer = 1;
 
-        while (isContinueGame()){
+        while (isContinueGame()) {
             Player player = playerList.get(currentPlayer);
-            String playerInput = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
-            // TODO: Check the coordinates, convert to ints for grid
-            int[] coordinate = inputHelper.convertInputToCoordinate(playerInput);
+            Player enemy = playerList.get(otherPlayer);
+
+            boolean isValidHit = false;
+            int[] coordinate = new int[2];
+            while (!isValidHit) {
+                String playerInput = !player.isCpu() ? displaySelectCoordinatePrompt() : generateRandomCoordinate();
+                coordinate = inputHelper.convertInputToCoordinate(playerInput);
+                isValidHit = player.isValidHit(coordinate, enemy);
+            }
 
             player.handleHit(coordinate, playerList.get(otherPlayer));
 

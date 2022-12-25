@@ -73,15 +73,19 @@ public class Board {
 
     private boolean isValidShipPlacement(int[]coordinate, int shipSize, int direction){
         int[] currentCoord;
-        for (int i = 0; i < shipSize; i++){
-            if (direction == 0) { // horizontal
-                currentCoord = new int[]{coordinate[0], coordinate[1] + i};
-            } else { //vertical
-                currentCoord = new int[]{coordinate[0]+  i, coordinate[1]};
+        try {
+            for (int i = 0; i < shipSize; i++) {
+                if (direction == 0) { // horizontal
+                    currentCoord = new int[]{coordinate[0], coordinate[1] + i};
+                } else { //vertical
+                    currentCoord = new int[]{coordinate[0] + i, coordinate[1]};
+                }
+                if (!validSpot(currentCoord) && !grid[currentCoord[0]][currentCoord[1]].isOccupied()) {
+                    return false;
+                }
             }
-            if (!validSpot(currentCoord) && !grid[coordinate[0]][coordinate[1]].isOccupied()){
-                return false;
-            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
         }
         System.out.printf("Found valid place with size %d coordinate at: row=%d, col=%d, direction=%d%n", shipSize, coordinate[0], coordinate[1], direction);
         return true;
