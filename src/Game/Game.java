@@ -66,6 +66,7 @@ public class Game {
                 }
             }
         }
+        System.out.println("It's a tie!");
     }
 
     /*
