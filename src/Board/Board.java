@@ -145,16 +145,25 @@ public class Board {
                 && col >= 0 && col < BOARD_SIZE);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                Spot spot = getSpot(i, j);
 
-    private int convertLetterToIndex(char letter){
-        // a = 97 | ASCII
-        int A_ASCII = 97;
-        if ((int) letter < A_ASCII || (int) letter > A_ASCII + boardSize) {
-            throw new IllegalArgumentException("Row provided is not a valid value. " +
-                    "Please enter a letter from A to J (case insensitive)");
+                if (spot.isHit() && spot.isOccupied()) {
+                    str.append("🟥");
+                } else if (spot.isOccupied()) {
+                    str.append("⚓️");
+                } else if (spot.isHit()) {
+                    str.append("⬜️");
+                } else {
+                    str.append("🟦");
+                }
+            }
+            System.out.print("\n");
         }
-        return (int) letter - A_ASCII;
-
-
+        return str.toString();
     }
 }

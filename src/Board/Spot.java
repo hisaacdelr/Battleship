@@ -29,8 +29,6 @@ public class Spot {
     }
 
     public void setHit(boolean state) {
-        if (occupied) {
-            hit = state;
-        }
+        hit = state;
     }
 }

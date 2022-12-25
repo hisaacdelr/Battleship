@@ -65,8 +65,8 @@ public class Game {
                 otherPlayer = 1;
             }
 
-            printBoard(enemy.getBoard());
-
+            System.out.println("Enemy board: ");
+            System.out.println(enemy.getBoard().toString());
         }
         declareWinner();
     }
@@ -78,26 +78,6 @@ public class Game {
             }
         }
         return true;
-    }
-
-    private void printBoard(Board board){
-        System.out.println("Enemy Board Status: ");
-        for (int i = 0; i < BOARD_SIZE; i++){
-            for (int j = 0; j < BOARD_SIZE; j++){
-                Spot spot = board.getSpot(i, j);
-
-                if (spot.isHit() && spot.isOccupied()) {
-                    System.out.print("🟥");
-                } else if(spot.isOccupied()){
-                    System.out.print("⚓️");
-                } else if (spot.isHit()) {
-                    System.out.print("⬜️");
-                } else {
-                    System.out.print("🟦");
-                }
-            }
-            System.out.print("\n");
-        }
     }
 
     private void declareWinner(){
