@@ -47,7 +47,9 @@ public class Board {
 
                 if (spot.isHit() && spot.isOccupied()) {
                     System.out.print("🟥");
+
                 } else if (spot.isOccupied()) {
+                    // Mainly for demonstrating ship placement on print console, remove as needed
                     System.out.print("⚓️");
                 } else if (spot.isHit()) {
                     System.out.print("⬜️");
@@ -121,7 +123,6 @@ public class Board {
             foundValidShipPlacement = isValidShipPlacement(coordinate, direction, shipSize);
         }
         setShipOnBoard(coordinate, direction, shipSize);
-        System.out.printf("Generated ship with size %d coordinate at: row=%d, col=%d, direction=%d%n", shipSize, coordinate[0], coordinate[1], direction);
     }
 
     /**
@@ -150,7 +151,6 @@ public class Board {
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
-        System.out.printf("Found valid place with size %d coordinate at: row=%d, col=%d, direction=%d%n", shipSize, coordinate[0], coordinate[1], direction);
         return true;
     }
 

@@ -13,3 +13,12 @@
 - The computer is an easy opponent: it needs only to make a random selection from the squares it has not selected.
 - The purpose of this exercise is to demonstrate program design and code readability with a program that is relatively quick to implement. **A pretty user interface is not required.**
 - We should be able to compile and run the program to see it working
+
+## Improvements / Considerations
+- Better logging to demonstrate dynamic board size
+- Input coordinate can only take a pattern such as `a4` or `A4`. 
+Future input may look different, best to check for those formats too. ex.:
+  - A,4
+  - A  4
+  - (A, 4) (and other non-alphanumeric symbols around the letter and number)
+- Code is written with 1 v. 1 game structure.
