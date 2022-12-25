@@ -1,9 +1,5 @@
 package Board;
 
-/*
-    Contains logic related to game grid and turn-logic re
- */
-
 import Ship.Ship;
 
 import java.util.ArrayList;
@@ -12,6 +8,9 @@ import java.util.Random;
 import static Utilities.Constants.BOARD_SIZE;
 import static Utilities.Constants.HORIZONTAL;
 
+/*
+    Contains logic related to game grid and turn-logic re
+ */
 public class Board {
     private Spot[][] grid;
     private final int[] SHIP_SIZES = new int[]{5, 4, 3, 2};

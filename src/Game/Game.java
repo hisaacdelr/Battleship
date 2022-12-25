@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import Board.Board;
-import Board.Spot;
 import Player.CpuPlayer;
 import Player.HumanPlayer;
 import Player.Player;
@@ -22,6 +20,10 @@ public class Game {
     InputHelper inputHelper = new InputHelper();
 
     private ArrayList<Player> playerList = new ArrayList<>();
+
+    /**
+     * Initializes the players and their dependencies participating in the game.
+     */
     public void setupPlayers(){
         System.out.println("Setting up players in the game...");
 
@@ -69,6 +71,12 @@ public class Game {
         declareWinner();
     }
 
+    /**
+     * Checks whether a win-condition has been met.
+     * A win-condition is met when one player's ships have all sunk.
+     *
+     * @return  True if game continues, false otherwise.
+     */
     public boolean isContinueGame(){
         for (Player player : playerList) {
             if (!player.hasShips()) {
@@ -78,6 +86,9 @@ public class Game {
         return true;
     }
 
+    /**
+     * Prints out the name of the winner of the game.
+     */
     private void declareWinner(){
         for (Player player : playerList) {
             if (player.hasShips()) {
@@ -91,10 +102,12 @@ public class Game {
         System.out.println("Thanks for playing!");
     }
 
-    /*
-        User Prompt methods, move to print utility class
+    /**
+     * Prompts the user on console to type a coordinate.
+     * Returns the coordinate the user types in.
+     *
+     * @return      A String of user-legible coordinate
      */
-
     public String getCoordinateFromPrompt(){
         System.out.println("Please type a coordinate | rows: A-J | col: 1-10 ");
         System.out.print("Ex. A4, J10: ");
@@ -104,10 +117,13 @@ public class Game {
         return coordinate;
     }
 
+    /**
+     * Generates a random user-legible coordinate on the board
+     *
+     * @return      A String of a user-legible coordinate
+     */
     public String generateRandomCoordinate(){
         Random r = new Random();
-        // A = 65, a = 97, 32
-        // 26 letters in alphabet
         char row = (char) (r.nextInt(BOARD_SIZE) + 'A');
         int col = r.nextInt(BOARD_SIZE) + 1;
         System.out.printf("\nCPU selected coordinate %s%d%n", row, col);
