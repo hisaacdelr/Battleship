@@ -13,8 +13,6 @@ import Utilities.InputHelper;
 
 import static Utilities.Constants.BOARD_SIZE;
 
-
-
 /**
  * Contains logic related to conducting a game.
  */
@@ -52,10 +50,10 @@ public class Game {
             while (!isValidHit) {
                 String playerInput = !player.isCpu() ? getCoordinateFromPrompt() : generateRandomCoordinate();
                 coordinate = inputHelper.convertInputToCoordinate(playerInput);
-                isValidHit = player.isValidHit(coordinate, enemy);
+                isValidHit = enemy.getBoard().isValidHit(coordinate);
             }
 
-            player.handleHit(coordinate, playerList.get(otherPlayer));
+            enemy.getBoard().handleHit(coordinate);
 
             if (currentPlayer == 0) {
                 currentPlayer = 1;

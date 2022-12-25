@@ -1,7 +1,7 @@
 package Board;
 
 /*
-
+    Contains logic related to game grid and turn-logic re
  */
 
 import Ship.Ship;
@@ -25,7 +25,6 @@ public class Board {
         for (int ship : SHIP_SIZES){
             randomlyPlaceShip(ship);
         }
-
     }
 
     public ArrayList<Ship> getShips() {
@@ -40,6 +39,57 @@ public class Board {
      */
     public Spot getSpot(int row, int column){
         return grid[row][column];
+    }
+
+    public void printBoard() {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                Spot spot = getSpot(i, j);
+
+                if (spot.isHit() && spot.isOccupied()) {
+                    System.out.print("🟥");
+                } else if (spot.isOccupied()) {
+                    System.out.print("⚓️");
+                } else if (spot.isHit()) {
+                    System.out.print("⬜️");
+                } else {
+                    System.out.print("🟦");
+                }
+            }
+            System.out.print("\n");
+        }
+    }
+
+    /**
+     * Checks if a Spot at the given coordinate can be hit on this board.
+     * A Spot cannot be hit more than once.
+     *
+     * @param  coordinate  array that contains 0-based indices of the row and column
+     * @return      true if a spot can be hit, false otherwise
+     */
+    public boolean isValidHit(int[] coordinate){
+        try {
+            Spot spot = getSpot(coordinate[0], coordinate[1]);
+            if (spot.isHit()){
+                System.out.println("Coordinate was already selected. Please choose another coordinate.");
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Marks a spot in this board as hit.
+     *
+     * @param  coordinate  array that contains 0-based indices of the row and column
+     */
+    public void handleHit(int[] coordinate) {
+        Spot target = getSpot(coordinate[0], coordinate[1]);
+
+        target.setHit(true);
     }
 
     private Spot[][] createGrid(){
@@ -80,9 +130,9 @@ public class Board {
      * A Ship can only be placed within the board and
      * not occupy the same spot another Ship is occupying.
      *
-     * @param  @param  shipSize  number of spots a ship occupies
      * @param  coordinate  array that contains 0-based indices of the row and column
      * @param  direction  if the ship is horizontal or vertical
+     * @param  shipSize  number of spots a ship occupies
      * @return      true if ship can be placed, false otherwise
      */
     private boolean isValidShipPlacement(int[]coordinate, int direction, int shipSize){
@@ -143,24 +193,5 @@ public class Board {
         int col = coordinate[1];
         return (row >= 0 && row < BOARD_SIZE
                 && col >= 0 && col < BOARD_SIZE);
-    }
-
-    public void printBoard() {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                Spot spot = getSpot(i, j);
-
-                if (spot.isHit() && spot.isOccupied()) {
-                    System.out.print("🟥");
-                } else if (spot.isOccupied()) {
-                    System.out.print("⚓️");
-                } else if (spot.isHit()) {
-                    System.out.print("⬜️");
-                } else {
-                    System.out.print("🟦");
-                }
-            }
-            System.out.print("\n");
-        }
     }
 }
