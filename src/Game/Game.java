@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Board.Board;
+import Board.Spot;
 import Player.CpuPlayer;
 import Player.HumanPlayer;
 import Player.Player;
@@ -57,6 +58,8 @@ public class Game {
                 otherPlayer = 1;
             }
 
+            printBoard(enemy.getBoard());
+
         }
 
         declareWinner();
@@ -69,6 +72,24 @@ public class Game {
             }
         }
         return true;
+    }
+
+    private void printBoard(Board board){
+        for (int i = 0; i < BOARD_SIZE; i++){
+            for (int j = 0; j < BOARD_SIZE; j++){
+                Spot spot = board.getSpot(i, j);
+                if (spot.isHit() && spot.isOccupied()) {
+                    System.out.print("🟥");
+                } else if(spot.isOccupied()){
+                    System.out.print("⚓️");
+                } else if (spot.isHit()) {
+                    System.out.print("⬜️");
+                } else {
+                    System.out.print("🟦");
+                }
+            }
+            System.out.print("\n");
+        }
     }
 
     private void declareWinner(){
@@ -101,7 +122,7 @@ public class Game {
         Random r = new Random();
         // A = 65, a = 97, 32
         // 26 letters in alphabet
-        char row = (char) (r.nextInt(26) + 'A');
+        char row = (char) (r.nextInt(BOARD_SIZE) + 'A');
         int col = r.nextInt(BOARD_SIZE) + 1;
         System.out.printf("CPU selected coordinate %s%d%n", row, col);
         return String.format("%c%d", row, col);

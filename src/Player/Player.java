@@ -8,6 +8,10 @@ public abstract class Player {
 
     protected Board board;
 
+    public Board getBoard() {
+        return board;
+    }
+
     // TODO : redudndant with Board's validSpot method maybe? refactor
     public boolean isValidHit(int[] coordinate, Player enemy){
         try {
