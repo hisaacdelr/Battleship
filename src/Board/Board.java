@@ -10,29 +10,38 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static Utilities.Constants.BOARD_SIZE;
+import static Utilities.Constants.HORIZONTAL;
 
 public class Board {
     private Spot[][] grid;
     private final int[] SHIP_SIZES = new int[]{5, 4, 3, 2};
-
     private ArrayList<Ship> ships = new ArrayList<>();
     private final int boardSize;
 
     public Board(){
         boardSize = BOARD_SIZE;
         grid = createGrid();
-        placeShipsOnBoard();
+
+        for (int ship : SHIP_SIZES){
+            randomlyPlaceShip(ship);
+        }
+
     }
 
     public ArrayList<Ship> getShips() {
         return ships;
     }
 
-    public Spot getSpot(int x, int y){
-        return grid[x][y];
+    /**
+     * Gets the Spot object at the given grid indices
+     *
+     * @param  row  0-based int for the row
+     * @param  column  0-based int for the column
+     */
+    public Spot getSpot(int row, int column){
+        return grid[row][column];
     }
 
-    // Move to utility function
     private Spot[][] createGrid(){
         Spot[][] grid = new Spot[boardSize][boardSize];
         // initialize spot objects
@@ -44,13 +53,12 @@ public class Board {
         return grid;
     }
 
-    private void placeShipsOnBoard(){
-        for (int ship : SHIP_SIZES){
-            placeShip(ship);
-        }
-    }
-
-    private void placeShip(int shipSize){
+    /**
+     * Initializes one Ship on the board at a random position
+     *
+     * @param  shipSize  number of spots a ship occupies
+     */
+    private void randomlyPlaceShip(int shipSize){
         // while not valid
         boolean foundValidShipPlacement = false;
         int[] coordinate = new int[2];
@@ -59,23 +67,29 @@ public class Board {
         // keep placing the ship
         while(!foundValidShipPlacement){
             Random r = new Random();
-            // 0 = horizontal, 1 = vertical
             direction = r.nextInt(2);
-
-            // create starting coordinate
             coordinate = new int[]{r.nextInt(BOARD_SIZE), r.nextInt(BOARD_SIZE)};
-            // with ship size, do for loop and check if the rest of the coordinates are also valid
             foundValidShipPlacement = isValidShipPlacement(coordinate, shipSize, direction);
         }
-        setShipOnBoard(shipSize, coordinate, direction);
+        setShipOnBoard(coordinate, direction, shipSize);
         System.out.printf("Generated ship with size %d coordinate at: row=%d, col=%d, direction=%d%n", shipSize, coordinate[0], coordinate[1], direction);
     }
 
-    private boolean isValidShipPlacement(int[]coordinate, int shipSize, int direction){
+    /**
+     * Checks if a Ship can be placed in Spots on the Board
+     * A Ship can only be placed within the board and
+     * not occupy the same spot another Ship is occupying.
+     *
+     * @param  @param  shipSize  number of spots a ship occupies
+     * @param  coordinate  array that contains 0-based indices of the row and column
+     * @param  direction  if the ship is horizontal or vertical
+     * @return      true if ship can be placed, false otherwise
+     */
+    private boolean isValidShipPlacement(int[]coordinate, int direction, int shipSize){
         int[] currentCoord;
         try {
             for (int i = 0; i < shipSize; i++) {
-                if (direction == 0) { // horizontal
+                if (direction == HORIZONTAL) { // horizontal
                     currentCoord = new int[]{coordinate[0], coordinate[1] + i};
                 } else { //vertical
                     currentCoord = new int[]{coordinate[0] + i, coordinate[1]};
@@ -91,14 +105,22 @@ public class Board {
         return true;
     }
 
-    private void setShipOnBoard(int shipSize, int[] coordinate, int direction){
+    /**
+     * Creates the Spot objects a Ship will be placed on. Then it
+     * initializes a Ship object onto the player's Board in the spots' locations.
+     *
+     * @param  shipSize  number of spots a ship occupies
+     * @param  coordinate  array that contains 0-based indices of the row and column
+     * @param  direction  if the ship will be placed horizontally or vertically
+     */
+    private void setShipOnBoard(int[] coordinate, int direction, int shipSize){
         ArrayList<Spot> shipSpots = new ArrayList<>();
         for (int i = 0; i < shipSize; i++){
             Spot currentSpot;
-            if (direction == 0) { // horizontal
+            if (direction == HORIZONTAL) {
                 grid[coordinate[0]][coordinate[1] + i].setOccupied(true);
                 currentSpot = grid[coordinate[0]][coordinate[1] + i];
-            } else { //vertical
+            } else {
                 grid[coordinate[0] + i][coordinate[1]].setOccupied(true);
                 currentSpot = grid[coordinate[0] + i][coordinate[1]];
             }
@@ -109,9 +131,12 @@ public class Board {
         ships.add(ship);
     }
 
-    /*
-        input: int[] coordinates, [row, col], 0-based
-        output: returns if the coordinate is a spot within the board
+
+    /**
+     * Returns if the coordinate is within the bounds of the board.
+     *
+     * @param  coordinate  array that contains 0-based indices of the row and column
+     * @return      true if coordinate is within the board, false otherwise
      */
     private boolean validSpot(int[] coordinate){
         int row = coordinate[0];

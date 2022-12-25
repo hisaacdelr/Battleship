@@ -14,13 +14,17 @@ import Utilities.InputHelper;
 import static Utilities.Constants.BOARD_SIZE;
 
 
+
+/**
+ * Contains logic related to conducting a game.
+ */
 public class Game {
 
     Scanner cli = new Scanner(System.in);
     InputHelper inputHelper = new InputHelper();
 
     private ArrayList<Player> playerList = new ArrayList<>();
-    public void setup(){
+    public void setupPlayers(){
         System.out.println("Setting up players in the game...");
 
         Player humanPlayer = new HumanPlayer();
@@ -31,6 +35,9 @@ public class Game {
         playerList.add(cpuPlayer);
     }
 
+    /**
+     * Runs a single game with 2 players until a winner is declared.
+     */
     public void runGame(){
         System.out.println("Starting game!");
         int currentPlayer = 0;
@@ -61,7 +68,6 @@ public class Game {
             printBoard(enemy.getBoard());
 
         }
-
         declareWinner();
     }
 
