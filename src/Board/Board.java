@@ -69,7 +69,7 @@ public class Board {
             Random r = new Random();
             direction = r.nextInt(2);
             coordinate = new int[]{r.nextInt(BOARD_SIZE), r.nextInt(BOARD_SIZE)};
-            foundValidShipPlacement = isValidShipPlacement(coordinate, shipSize, direction);
+            foundValidShipPlacement = isValidShipPlacement(coordinate, direction, shipSize);
         }
         setShipOnBoard(coordinate, direction, shipSize);
         System.out.printf("Generated ship with size %d coordinate at: row=%d, col=%d, direction=%d%n", shipSize, coordinate[0], coordinate[1], direction);
@@ -145,25 +145,22 @@ public class Board {
                 && col >= 0 && col < BOARD_SIZE);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
+    public void printBoard() {
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 Spot spot = getSpot(i, j);
 
                 if (spot.isHit() && spot.isOccupied()) {
-                    str.append("🟥");
+                    System.out.print("🟥");
                 } else if (spot.isOccupied()) {
-                    str.append("⚓️");
+                    System.out.print("⚓️");
                 } else if (spot.isHit()) {
-                    str.append("⬜️");
+                    System.out.print("⬜️");
                 } else {
-                    str.append("🟦");
+                    System.out.print("🟦");
                 }
             }
             System.out.print("\n");
         }
-        return str.toString();
     }
 }

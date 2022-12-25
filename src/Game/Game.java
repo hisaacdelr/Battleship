@@ -66,7 +66,7 @@ public class Game {
             }
 
             System.out.println("Enemy board: ");
-            System.out.println(enemy.getBoard().toString());
+            enemy.getBoard().printBoard();
         }
         declareWinner();
     }
