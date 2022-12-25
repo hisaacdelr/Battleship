@@ -18,6 +18,4 @@ public class Ship {
     public Ship(List<Spot> spots){
         this.spots = spots;
     }
-
-
 }
