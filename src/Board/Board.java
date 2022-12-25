@@ -19,9 +19,12 @@ public class Board {
 
     public Board(){
         boardSize = BOARD_SIZE;
-        grid = new Spot[boardSize][boardSize]; // [row][col]
+        grid = createGrid();
+        placeShipsOnBoard();
+    }
 
-        setup();
+    public ArrayList<Ship> getShips() {
+        return ships;
     }
 
     public Spot getSpot(int x, int y){
@@ -29,23 +32,26 @@ public class Board {
     }
 
     // Move to utility function
-    private void setup(){
+    private Spot[][] createGrid(){
+        Spot[][] grid = new Spot[boardSize][boardSize];
         // initialize spot objects
         for(int row = 0; row < BOARD_SIZE; row++){
             for(int col = 0; col < BOARD_SIZE; col++){
                 grid[row][col] = new Spot(row, col);
             }
         }
+        return grid;
+    }
 
+    private void placeShipsOnBoard(){
         int[] shipSizes = new int[]{5, 4, 3, 2};
 
         for (int ship : shipSizes){
-            placeShipOnBoard(ship);
+            placeShip(ship);
         }
-
     }
 
-    private void placeShipOnBoard(int shipSize){
+    private void placeShip(int shipSize){
         // while not valid
         boolean foundValidShipPlacement = false;
         int[] coordinate = new int[2];
@@ -60,13 +66,13 @@ public class Board {
             // create starting coordinate
             coordinate = new int[]{r.nextInt(BOARD_SIZE), r.nextInt(BOARD_SIZE)};
             // with ship size, do for loop and check if the rest of the coordinates are also valid
-            foundValidShipPlacement = validShipPlacement(coordinate, shipSize, direction);
+            foundValidShipPlacement = isValidShipPlacement(coordinate, shipSize, direction);
         }
         setShipOnBoard(shipSize, coordinate, direction);
         System.out.printf("Generated ship with size %d coordinate at: row=%d, col=%d, direction=%d%n", shipSize, coordinate[0], coordinate[1], direction);
     }
 
-    private boolean validShipPlacement(int[]coordinate, int shipSize, int direction){
+    private boolean isValidShipPlacement(int[]coordinate, int shipSize, int direction){
         int[] currentCoord;
         for (int i = 0; i < shipSize; i++){
             if (direction == 0) { // horizontal

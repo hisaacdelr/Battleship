@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import Board.Board;
 import Player.CpuPlayer;
 import Player.HumanPlayer;
 import Player.Player;
@@ -16,6 +17,7 @@ public class Game {
     private ArrayList<Player> playerList = new ArrayList<>();
     public void setup(){
         System.out.println("Setting up players in the game...");
+
         Player humanPlayer = new HumanPlayer();
         Player cpuPlayer = new CpuPlayer();
 
@@ -77,9 +79,7 @@ public class Game {
         System.out.println("Please type a coordinate | rows: A-J | col: 1-10 ");
         System.out.print("Ex. A4, J10");
         String coordinate = cli.next();
-        // TODO: Check the coordinates
-        System.out.print("Select a column (1-10): ");
-        int col = cli.nextInt();
+        // TODO: Check the coordinates, convert to ints for grid
         System.out.printf("User selected coordinate %s", coordinate);
 
         return coordinate;
