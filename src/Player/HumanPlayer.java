@@ -4,11 +4,11 @@ import Board.Board;
 
 public class HumanPlayer extends Player {
 
-    public HumanPlayer(){
+    public HumanPlayer() {
         this.board = new Board();
     }
 
-    public boolean isCpu(){
+    public boolean isCpu() {
         return false;
     }
 }

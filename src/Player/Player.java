@@ -14,7 +14,7 @@ public abstract class Player {
     public abstract boolean isCpu();
 
     public boolean hasShips() {
-        for (Ship ship : this.board.getShips()){
+        for (Ship ship : this.board.getShips()) {
             if (!ship.isSunk()) {
                 return true;
             }

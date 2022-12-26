@@ -1,30 +1,28 @@
 package Board;
 
 /*
-    row = 0-based
-    col = 0-based
+    Model representing a single coordinate on the board
  */
-
 public class Spot {
     private final int row;
     private final int column;
     private boolean occupied = false;
     private boolean hit = false;
 
-    public Spot(int row, int column){
+    public Spot(int row, int column) {
         this.row = row;
         this.column = column;
     }
 
-    public boolean isOccupied(){
+    public boolean isOccupied() {
         return occupied;
     }
 
-    public void setOccupied(boolean state){
+    public void setOccupied(boolean state) {
         occupied = state;
     }
 
-    public boolean isHit(){
+    public boolean isHit() {
         return hit;
     }
 
